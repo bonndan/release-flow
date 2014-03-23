@@ -9,6 +9,7 @@ return array(
     'vierbergenlars\\SemVer\\' => array($vendorDir . '/vierbergenlars/php-semver/src'),
     'vierbergenlars\\LibJs\\' => array($vendorDir . '/vierbergenlars/php-semver/src'),
     'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
+    'Symfony\\Component\\OptionsResolver\\' => array($vendorDir . '/symfony/options-resolver'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
-    'Gitter' => array($vendorDir . '/klaussilveira/gitter/lib'),
+    '' => array($vendorDir . '/kzykhys/git/src'),
 );

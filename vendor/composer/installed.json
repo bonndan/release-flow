@@ -105,56 +105,6 @@
         "homepage": "http://symfony.com"
     },
     {
-        "name": "klaussilveira/gitter",
-        "version": "0.2.0",
-        "version_normalized": "0.2.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/klaussilveira/gitter.git",
-            "reference": "910a3d324caf53d8d21b55fb80a9a6735974a80c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/klaussilveira/gitter/zipball/910a3d324caf53d8d21b55fb80a9a6735974a80c",
-            "reference": "910a3d324caf53d8d21b55fb80a9a6735974a80c",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0",
-            "symfony/process": ">=2.2"
-        },
-        "require-dev": {
-            "phpunit/phpunit": ">=3.7.1",
-            "symfony/filesystem": ">=2.2"
-        },
-        "time": "2013-06-01 13:32:37",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Gitter": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-2-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Klaus Silveira",
-                "email": "klaussilveira@php.net",
-                "homepage": "http://www.klaussilveira.com/",
-                "role": "Developer"
-            }
-        ],
-        "description": "Gitter allows you to interact in an object oriented manner with Git repositories.",
-        "homepage": "https://github.com/klaussilveira/gitter",
-        "keywords": [
-            "git",
-            "vcs"
-        ]
-    },
-    {
         "name": "symfony/console",
         "version": "v2.4.2",
         "version_normalized": "2.4.2.0",
@@ -210,5 +160,109 @@
         ],
         "description": "Symfony Console Component",
         "homepage": "http://symfony.com"
+    },
+    {
+        "name": "symfony/options-resolver",
+        "version": "v2.4.2",
+        "version_normalized": "2.4.2.0",
+        "target-dir": "Symfony/Component/OptionsResolver",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/OptionsResolver.git",
+            "reference": "723ec89b49960211ccf2ab46b77185f2616169c3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/OptionsResolver/zipball/723ec89b49960211ccf2ab46b77185f2616169c3",
+            "reference": "723ec89b49960211ccf2ab46b77185f2616169c3",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2014-01-07 13:28:54",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\OptionsResolver\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com",
+                "homepage": "http://fabien.potencier.org",
+                "role": "Lead Developer"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony OptionsResolver Component",
+        "homepage": "http://symfony.com",
+        "keywords": [
+            "config",
+            "configuration",
+            "options"
+        ]
+    },
+    {
+        "name": "kzykhys/git",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kzykhys/PHPGit.git",
+            "reference": "8b3ee3147d58e0aee62610f0aebcd30eb076ad5d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kzykhys/PHPGit/zipball/8b3ee3147d58e0aee62610f0aebcd30eb076ad5d",
+            "reference": "8b3ee3147d58e0aee62610f0aebcd30eb076ad5d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2",
+            "symfony/options-resolver": ">=2.3",
+            "symfony/process": ">=2.3"
+        },
+        "require-dev": {
+            "symfony/filesystem": ">=2.3"
+        },
+        "time": "2014-02-27 13:14:59",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kazuyuki Hayashi",
+                "email": "hayashi@valnur.net"
+            }
+        ],
+        "description": "A Git wrapper for PHP5.3+"
     }
 ]
