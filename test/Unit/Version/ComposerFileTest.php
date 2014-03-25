@@ -1,7 +1,7 @@
 <?php
-namespace bonndan\ReleaseFlow\Test;
+namespace bonndan\ReleaseFlow\Test\Version;
 
-use bonndan\ReleaseFlow\ComposerFile;
+use bonndan\ReleaseFlow\Version\ComposerFile;
 use bonndan\ReleaseFlow\Version;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;

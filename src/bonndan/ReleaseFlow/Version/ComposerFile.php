@@ -1,6 +1,8 @@
 <?php
-namespace bonndan\ReleaseFlow;
+namespace bonndan\ReleaseFlow\Version;
 
+use bonndan\ReleaseFlow\Version;
+use bonndan\ReleaseFlow\Version\Detector\DetectorInterface;
 use InvalidArgumentException;
 use SplFileObject;
 
@@ -11,7 +13,7 @@ use SplFileObject;
  * @author Daniel Pozzi <bonndan76@googlemail.com>
  * @todo replace with library
  */
-class ComposerFile
+class ComposerFile implements DetectorInterface
 {
     /**
      * composer file
