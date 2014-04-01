@@ -2,6 +2,7 @@
 
 namespace bonndan\ReleaseFlow\VCS;
 
+use bonndan\ReleaseFlow\Exception;
 use bonndan\ReleaseFlow\Version;
 
 /**
@@ -19,7 +20,7 @@ interface VCSInterface
     /**
      * Returns the hight valid version.
      *
-     * @return bonndan\ReleaseFlow\Version
+     * @return Version
      */
     public function getCurrentVersion();
 
@@ -51,4 +52,36 @@ interface VCSInterface
      * @return mixed
      */
     public function saveWorkingCopy($commitMsg = '');
+    
+    /**
+     * Start a git flow release.
+     * 
+     * @param Version $version
+     * @return array output
+     */
+    public function startRelease(Version $version);
+    
+    /**
+     * Finishes the current git flow release without tagging.
+     * 
+     * @return Version
+     * @throws Exception
+     */
+    public function finishRelease();
+    
+    /**
+     * Start a git flow hotfix.
+     * 
+     * @param Version $version
+     * @return array output
+     */
+    public function startHotfix(Version $version);
+    
+    /**
+     * Finishes the current git flow hotfix without tagging.
+     * 
+     * @return Version
+     * @throws Exception
+     */
+    public function finishHotfix();
 }
