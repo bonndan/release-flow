@@ -217,14 +217,24 @@ class Git implements VCSInterface
      */
     private function executeGitCommand($cmd)
     {
+        /**
+         * @link http://stackoverflow.com/a/10986987
+         * @link https://github.com/symfony/symfony/pull/3565 
+         * @link https://github.com/symfony/symfony/issues/3555
         $builder = $this->git->getProcessBuilder();
+        $builder->inheritEnvironmentVariables(true); //
         $builder->add($cmd);
         $process = $builder->getProcess();
+         * 
+         */
         
         if ($this->dryRun) {
             return $cmd;
         }
         
-        return $this->git->run($process);
+        $var = null;
+        system('git ' . $cmd, $var);
+        return $var;
+        //return $this->git->run($process);
     }
 }
