@@ -2,9 +2,11 @@
 namespace bonndan\ReleaseFlow\Command;
 
 use bonndan\ReleaseFlow\VCS\VCSInterface;
+use bonndan\ReleaseFlow\Version\ComposerFile;
 use bonndan\ReleaseFlow\Version\Detector\GitFlowBranch;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\DialogHelper;
+
 /**
  * Base command
  *
@@ -25,12 +27,28 @@ abstract class FlowCommand extends Command
      * @var VCSInterface
      */
     protected $vcs;
+    
+    /**
+     * The composer file, optional
+     * 
+     * @var ComposerFile|null
+     */
+    protected $composerFile;
 
-    public function __construct(GitFlowBranch $flow, VCSInterface $vcs, $name = null)
+    /**
+     * Constructor.
+     * 
+     * @param GitFlowBranch $flow
+     * @param VCSInterface $vcs
+     * @param ComposerFile $composerFile
+     * @param string $name
+     */
+    final public function __construct(GitFlowBranch $flow, VCSInterface $vcs, ComposerFile $composerFile = null, $name = null)
     {
         parent::__construct($name);
         $this->flow = $flow;
         $this->vcs = $vcs;
+        $this->composerFile = $composerFile;
     }
     
     /**

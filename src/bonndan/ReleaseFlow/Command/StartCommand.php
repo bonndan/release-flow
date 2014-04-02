@@ -10,6 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Command that eases releasing with "git flow".
+ * 
+ * This commands asks for the version increment and then creates a regular git 
+ * flow release branch.
  *
  * @author Daniel Pozzi <bonndan76@googlemail.com>
  */

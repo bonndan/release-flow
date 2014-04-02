@@ -2,9 +2,9 @@
 
 namespace bonndan\ReleaseFlow;
 
-use bonndan\ReleaseFlow\Command\StartCommand;
 use bonndan\ReleaseFlow\VCS\Git as Git2;
 use bonndan\ReleaseFlow\VCS\VCSInterface;
+use bonndan\ReleaseFlow\Version\ComposerFile;
 use bonndan\ReleaseFlow\Version\Detector\GitFlowBranch;
 use PHPGit\Git;
 use Symfony\Component\Console\Application as SFApplication;
@@ -31,6 +31,13 @@ class Application extends SFApplication
      * @var GitFlowBranch
      */
     private $flow;
+    
+    /**
+     * composer file
+     * 
+     * @var ComposerFile
+     */
+    private $composerFile;
 
     public function run(InputInterface $input = null, OutputInterface $output = null)
     {
@@ -43,7 +50,7 @@ class Application extends SFApplication
     /**
      * Inject a vcs implementation.
      * 
-     * @param \bonndan\ReleaseFlow\VCS\VCSInterface $vcs
+     * @param VCSInterface $vcs
      */
     public function setVcs(VCSInterface $vcs)
     {
@@ -51,13 +58,23 @@ class Application extends SFApplication
     }
 
     /**
+     * Inject a composer file.
+     * 
+     * @param ComposerFile $composerFile
+     */
+    public function setComposerFile(ComposerFile $composerFile)
+    {
+        $this->composerFile = $composerFile;
+    }
+    
+    /**
      * Creates and adds a new command.
      * 
      * @param string $name command class name
      */
     private function addCommand($name)
     {
-        $this->add(new $name($this->flow, $this->vcs));
+        $this->add(new $name($this->flow, $this->vcs, $this->composerFile));
     }
     
     /**
@@ -68,15 +85,21 @@ class Application extends SFApplication
      */
     private function ensureDependencies()
     {
+        $workingDir = getcwd();
         if ($this->vcs === null) {
             $git = new Git();
-            $git->setRepository(getcwd());
+            $git->setRepository($workingDir);
 
             $this->vcs = new Git2($git);
         }
         
         if ($this->flow === null) {
             $this->flow = new GitFlowBranch($this->vcs);
+        }
+        
+        if ($this->composerFile === null) {
+            $file = new \SplFileObject($workingDir . '/composer.json');
+            $this->composerFile = new ComposerFile($file);
         }
     }
 }
