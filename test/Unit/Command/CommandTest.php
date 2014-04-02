@@ -22,11 +22,16 @@ abstract class CommandTest extends PHPUnit_Framework_TestCase
     
     protected $vcs;
     
+    protected $composerFile;
+    
     public function setUp()
     {
         $this->input = $this->getMock("\Symfony\Component\Console\Input\InputInterface");
         $this->output = $this->getMock("\Symfony\Component\Console\Output\OutputInterface");
         $this->flow = $this->getMockBuilder("\bonndan\ReleaseFlow\Version\Detector\GitFlowBranch")
+                ->disableOriginalConstructor()
+                ->getMock();
+        $this->composerFile = $this->getMockBuilder("\bonndan\ReleaseFlow\Version\ComposerFile")
                 ->disableOriginalConstructor()
                 ->getMock();
         $this->vcs = $this->getMock("\bonndan\ReleaseFlow\VCS\VCSInterface");
