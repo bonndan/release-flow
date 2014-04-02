@@ -4,6 +4,7 @@ namespace bonndan\ReleaseFlow\Command;
 use bonndan\ReleaseFlow\Exception;
 use bonndan\ReleaseFlow\Version;
 use bonndan\ReleaseFlow\Version\Detector\GitFlowBranch;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -14,8 +15,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Daniel Pozzi <bonndan76@googlemail.com>
  */
-class FinishCommand extends FlowCommand
+class FinishCommand extends Command
 {
+    use FlowDependenciesTrait;
     
     protected function configure()
     {

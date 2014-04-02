@@ -21,7 +21,8 @@ class FinishCommandTest extends CommandTest
     public function setUp()
     {
         parent::setUp();
-        $this->command = new FinishCommand($this->flow, $this->vcs, $this->composerFile);
+        $this->command = new FinishCommand();
+        $this->command->setReleaseFlowDependencies($this->flow, $this->vcs, $this->composerFile);
         $this->simulateHelperSet($this->command);
     }
     

@@ -21,7 +21,8 @@ class StartCommandTest extends CommandTest
     public function setUp()
     {
         parent::setUp();
-        $this->command = new StartCommand($this->flow, $this->vcs);
+        $this->command = new StartCommand();
+        $this->command->setReleaseFlowDependencies($this->flow, $this->vcs, $this->composerFile);
         $this->simulateHelperSet($this->command);
     }
     

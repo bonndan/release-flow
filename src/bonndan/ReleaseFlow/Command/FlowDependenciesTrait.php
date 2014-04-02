@@ -4,7 +4,6 @@ namespace bonndan\ReleaseFlow\Command;
 use bonndan\ReleaseFlow\VCS\VCSInterface;
 use bonndan\ReleaseFlow\Version\ComposerFile;
 use bonndan\ReleaseFlow\Version\Detector\GitFlowBranch;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\DialogHelper;
 
 /**
@@ -12,7 +11,7 @@ use Symfony\Component\Console\Helper\DialogHelper;
  *
  * @author Daniel Pozzi <bonndan76@googlemail.com>
  */
-abstract class FlowCommand extends Command
+trait FlowDependenciesTrait
 {
     /**
      * The git flow branch version detector.
@@ -41,11 +40,9 @@ abstract class FlowCommand extends Command
      * @param GitFlowBranch $flow
      * @param VCSInterface $vcs
      * @param ComposerFile $composerFile
-     * @param string $name
      */
-    final public function __construct(GitFlowBranch $flow, VCSInterface $vcs, ComposerFile $composerFile = null, $name = null)
+    public function setReleaseFlowDependencies(GitFlowBranch $flow, VCSInterface $vcs, ComposerFile $composerFile = null)
     {
-        parent::__construct($name);
         $this->flow = $flow;
         $this->vcs = $vcs;
         $this->composerFile = $composerFile;

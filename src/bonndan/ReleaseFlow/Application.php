@@ -44,6 +44,7 @@ class Application extends SFApplication
         $this->ensureDependencies();
         $this->addCommand('bonndan\ReleaseFlow\Command\StartCommand');
         $this->addCommand('bonndan\ReleaseFlow\Command\FinishCommand');
+        $this->addCommand('bonndan\ReleaseFlow\Command\ListCommand');
         
         parent::run($input, $output);
     }
