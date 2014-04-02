@@ -44,7 +44,7 @@ class StartCommand extends FlowCommand
         $nextVersion    = $currentVersion->inc($inc);
         
         $output->writeln('<info>The next version will be ' . $nextVersion . '.</info>');
-        //$this->vcs->startRelease()
+        $this->vcs->startRelease($nextVersion);
     }
 
 }
