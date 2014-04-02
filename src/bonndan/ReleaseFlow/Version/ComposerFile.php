@@ -87,7 +87,7 @@ class ComposerFile implements DetectorInterface
             return null;
         }
         
-        return $json->version;
+        return new Version($json->version);
     }
     
      /**

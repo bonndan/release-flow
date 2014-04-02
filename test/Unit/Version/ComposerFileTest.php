@@ -52,7 +52,9 @@ class ComposerFileTest extends PHPUnit_Framework_TestCase
      */
     public function testGetCurrentVersion()
     {
-        $this->assertEquals("0.2.0", $this->file->getCurrentVersion());
+        $actual = $this->file->getCurrentVersion();
+        $this->assertInstanceOf("\bonndan\ReleaseFlow\Version", $actual);
+        $this->assertEquals("0.2.0", $actual);
     }
 
     public function testGetCurrentVersionFails()
