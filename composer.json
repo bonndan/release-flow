@@ -17,7 +17,8 @@
         "kzykhys/git": "1.0.*@dev"
     },
     "suggest": {
-        "git-flow": "*"
+        "git-flow": "*",
+        "clue/phar-composer": "dev-master"
     },
     "autoload": {
         "psr-4": {
