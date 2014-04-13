@@ -102,7 +102,7 @@ class FinishCommandTest extends CommandTest
                 ->method('saveWorkingCopy')
                 ;
         
-        $this->dialog->expects($this->once())
+        $this->dialog->expects($this->exactly(2))
                 ->method('askConfirmation')
                 ->will($this->returnValue(true));
         $this->vcs->expects($this->once())
@@ -133,7 +133,7 @@ class FinishCommandTest extends CommandTest
                 ->method('saveWorkingCopy')
                 ;
         
-        $this->dialog->expects($this->once())
+        $this->dialog->expects($this->exactly(2))
                 ->method('askConfirmation')
                 ->will($this->returnValue(true));
         $this->vcs->expects($this->once())
