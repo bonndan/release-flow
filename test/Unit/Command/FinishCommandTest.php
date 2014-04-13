@@ -98,6 +98,9 @@ class FinishCommandTest extends CommandTest
                 ->will($this->returnValue(new Version('0.1.1')));
         $this->composerFile->expects($this->once())
                 ->method('setVersion');
+        $this->vcs->expects($this->once())
+                ->method('saveWorkingCopy')
+                ;
         
         $this->dialog->expects($this->once())
                 ->method('askConfirmation')
@@ -126,6 +129,9 @@ class FinishCommandTest extends CommandTest
                 ->will($this->returnValue(new Version('0.1.1')));
         $this->composerFile->expects($this->once())
                 ->method('setVersion');
+        $this->vcs->expects($this->once())
+                ->method('saveWorkingCopy')
+                ;
         
         $this->dialog->expects($this->once())
                 ->method('askConfirmation')
