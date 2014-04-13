@@ -95,6 +95,7 @@ class Git implements VCSInterface
 
     public function saveWorkingCopy($commitMsg = '')
     {
+        $this->git->add('.');
         return $this->git->commit($commitMsg);
     }
 
