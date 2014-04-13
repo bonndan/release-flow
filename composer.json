@@ -1,0 +1,30 @@
+
+{
+    "name": "bonndan/release-flow",
+    "description": "Semantic release versioning with git-flow and composer",
+    "license": "MIT",
+    "version": "0.0.0",
+    "authors": [
+        {
+            "name": "Daniel Pozzi",
+            "email": "bonndan76@googlemail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony\/console": ">=2.4.0",
+        "vierbergenlars/php-semver": "3.0.0-rc2",
+        "kzykhys/git": "1.0.*@dev"
+    },
+    "suggest": {
+        "git-flow": "*",
+        "clue/phar-composer": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "bonndan\\ReleaseFlow\\": "src/bonndan/ReleaseFlow",
+            "bonndan\\ReleaseFlow\\Test\\": "test/"
+        }
+    },
+    "bin": ["bin/release-flow"]
+}
