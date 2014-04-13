@@ -53,8 +53,10 @@ class GitTest extends \PHPUnit_Framework_TestCase
     {
         $vcs = Git::create($this->testDir);
         system("touch foo");
-        system("git add foo");
         $vcs->saveWorkingCopy('test');
+        
+        exec('git status -s', $output);
+        $this->assertEmpty($output);
     }
 
     public function testGetCurrentBranch()
