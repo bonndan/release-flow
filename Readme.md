@@ -4,6 +4,9 @@ Release with the flow.
 This project is going to be a successor of release-manager. It will be a zero-conf tool 
 to version PHP project releases semantically, tightly coupled with composer and git-flow.
 
+![screenshot](https://github.com/bonndan/release-flow/raw/develop/doc/screen.png "Usage")
+
+
 Usage:
 ------
 
