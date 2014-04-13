@@ -29,7 +29,7 @@ class FinishCommand extends Command {
 
     protected function execute(InputInterface $input, OutputInterface $output) {
         if (!$this->flow->isInTheFlow()) {
-            throw new Exception('You are not in a git flow release branch.');
+            throw new Exception('You are not in a git flow release branch (' . $this->vcs->getCurrentBranch(). ').');
         }
 
         $composerVersion = $this->composerFile->getCurrentVersion();
