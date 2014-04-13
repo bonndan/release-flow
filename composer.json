@@ -1,3 +1,4 @@
+
 {
     "name": "bonndan/release-flow",
     "description": "Semantic release versioning with git-flow and composer",
@@ -14,6 +15,9 @@
         "symfony\/console": ">=2.4.0",
         "vierbergenlars/php-semver": "3.0.0-rc2",
         "kzykhys/git": "1.0.*@dev"
+    },
+    "suggest": {
+        "git-flow": "*"
     },
     "autoload": {
         "psr-4": {
