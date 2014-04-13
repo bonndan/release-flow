@@ -77,7 +77,9 @@ class Application extends SFApplication
      */
     private function addCommand($name)
     {
-        $this->add(new $name($this->flow, $this->vcs, $this->composerFile));
+        $command = new $name();
+        $command->setReleaseFlowDependencies($this->flow, $this->vcs, $this->composerFile);
+        $this->add($command);
     }
 
     /**
