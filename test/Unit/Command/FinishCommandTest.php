@@ -96,6 +96,8 @@ class FinishCommandTest extends CommandTest
         $this->composerFile->expects($this->once())
                 ->method('getCurrentVersion')
                 ->will($this->returnValue(new Version('0.1.1')));
+        $this->composerFile->expects($this->once())
+                ->method('setVersion');
         
         $this->dialog->expects($this->once())
                 ->method('askConfirmation')
@@ -122,6 +124,8 @@ class FinishCommandTest extends CommandTest
         $this->composerFile->expects($this->once())
                 ->method('getCurrentVersion')
                 ->will($this->returnValue(new Version('0.1.1')));
+        $this->composerFile->expects($this->once())
+                ->method('setVersion');
         
         $this->dialog->expects($this->once())
                 ->method('askConfirmation')

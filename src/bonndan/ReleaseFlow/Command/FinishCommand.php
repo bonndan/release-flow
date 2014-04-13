@@ -41,13 +41,15 @@ class FinishCommand extends Command {
 
         $branchType = $this->flow->getBranchType();
         if ($branchType != GitFlowBranch::RELEASE) {
-            if ($this->getDialog()->askConfirmation($output, 'Please confirm to finish this hotfix.')) {
+            if ($this->getDialog()->askConfirmation($output, 'Please confirm to finish this hotfix (yes).')) {
                 $this->vcs->finishHotfix();
+                $this->composerFile->setVersion($branchVersion);
             }
         } else {
             $difference = $composerVersion->getDifferenceType($branchVersion);
-            if ($this->getDialog()->askConfirmation($output, 'Please confirm to finish this <info>' . $difference . '</info> release.')) {
+            if ($this->getDialog()->askConfirmation($output, 'Please confirm to finish this <info>' . $difference . '</info> release (yes).')) {
                 $this->vcs->finishRelease();
+                $this->composerFile->setVersion($branchVersion);
             }
         }
     }
