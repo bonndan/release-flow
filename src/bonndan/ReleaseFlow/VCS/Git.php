@@ -32,6 +32,12 @@ class Git implements VCSInterface
     private $dryRunCommandWords = array('tag', 'push', 'add', 'commit');
     
     /**
+     * for testing:  last executed command (via executeGitCommand)
+     * @var string|null
+     */
+    public $lastCommand;
+    
+    /**
      * Factory method.
      * 
      * @param string $directory
@@ -131,14 +137,17 @@ class Git implements VCSInterface
     /**
      * Finishes the current git flow release without tagging.
      * 
+     * @param boolean $publish
      * @return Version
      * @throws Exception
      */
-    public function finishRelease()
+    public function finishRelease($publish = false)
     {
+        $pFlag = $publish ? '-p ' : '';
+        
         $detector = new GitFlowBranch($this, GitFlowBranch::RELEASE);
         $version = $detector->getCurrentVersion();
-        $command = 'flow release finish  -m "' . (string)$version . '" ' . (string)$version . ' 1>/dev/null 2>&1';
+        $command = 'flow release finish ' .$pFlag . '-m "' . (string)$version . '" ' . (string)$version . ' 1>/dev/null 2>&1';
         $this->executeGitCommand($command);
         return $version;
     }
@@ -158,14 +167,17 @@ class Git implements VCSInterface
     /**
      * Finishes the current git flow hotfix without tagging.
      * 
+     * @param boolean $publish
      * @return Version
      * @throws Exception
      */
-    public function finishHotfix()
+    public function finishHotfix($publish = false)
     {
+        $pFlag = $publish ? '-p ' : '';
+        
         $detector = new GitFlowBranch($this, GitFlowBranch::HOTFIX);
         $version = $detector->getCurrentVersion();
-        $command = 'flow hotfix finish -m "' . (string)$version . '" ' . (string)$version . ' 1>/dev/null 2>&1';
+        $command = 'flow hotfix finish ' .$pFlag . '-m "' . (string)$version . '" ' . (string)$version . ' 1>/dev/null 2>&1';
         $this->executeGitCommand($command);
         return $version;
     }
@@ -230,6 +242,7 @@ class Git implements VCSInterface
          */
         
         if ($this->dryRun) {
+            $this->lastCommand = $cmd;
             return $cmd;
         }
         

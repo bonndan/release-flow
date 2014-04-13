@@ -64,10 +64,11 @@ interface VCSInterface
     /**
      * Finishes the current git flow release without tagging.
      * 
+     * @param boolean $publish whether to publish to $ORIGIN after finishing
      * @return Version
      * @throws Exception
      */
-    public function finishRelease();
+    public function finishRelease($publish = false);
     
     /**
      * Start a git flow hotfix.
@@ -80,8 +81,9 @@ interface VCSInterface
     /**
      * Finishes the current git flow hotfix without tagging.
      * 
+     * @param boolean $publish whether to publish to $ORIGIN after finishing
      * @return Version
      * @throws Exception
      */
-    public function finishHotfix();
+    public function finishHotfix($publish = false);
 }

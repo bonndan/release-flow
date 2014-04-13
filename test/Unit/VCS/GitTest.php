@@ -97,6 +97,17 @@ class GitTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2.2.2', $version->getVersion());
     }
     
+    public function testFinishReleaseWithPublishing()
+    {
+        $vcs = Git::create($this->testDir);
+        
+        system("git flow init -fd 1>/dev/null 2>&1");
+        system("git flow release start 2.2.2 1>/dev/null 2>&1");
+        $vcs->setDryRun(true);
+        $result = $vcs->finishRelease(true);
+        $this->assertContains('flow release finish -p', $vcs->lastCommand);
+    }
+    
     public function testFinishReleaseException()
     {
         $vcs = Git::create($this->testDir);
@@ -104,6 +115,37 @@ class GitTest extends \PHPUnit_Framework_TestCase
         
         $this->setExpectedException("\bonndan\ReleaseFlow\Exception", "Expected to find");
         $vcs->finishRelease();
+    }
+    
+    public function testFinishHotfix()
+    {
+        $vcs = Git::create($this->testDir);
+        
+        system("git flow init -fd 1>/dev/null 2>&1");
+        system("git flow hotfix start 2.2.2 1>/dev/null 2>&1");
+        $vcs->setDryRun(true);
+        $version = $vcs->finishHotfix();
+        $this->assertEquals('2.2.2', $version->getVersion());
+    }
+    
+    public function testFinishHotfixWithPublishing()
+    {
+        $vcs = Git::create($this->testDir);
+        
+        system("git flow init -fd 1>/dev/null 2>&1");
+        system("git flow hotfix start 2.2.2 1>/dev/null 2>&1");
+        $vcs->setDryRun(true);
+        $result = $vcs->finishHotfix(true);
+        $this->assertContains('flow hotfix finish -p', $vcs->lastCommand);
+    }
+    
+    public function testFinishHotfixException()
+    {
+        $vcs = Git::create($this->testDir);
+        system("git flow init -fd 1>/dev/null 2>&1");
+        
+        $this->setExpectedException("\bonndan\ReleaseFlow\Exception", "Expected to find");
+        $vcs->finishHotfix();
     }
 
     protected function tearDown()
