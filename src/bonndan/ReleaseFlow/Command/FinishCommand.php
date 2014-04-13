@@ -1,4 +1,5 @@
 <?php
+
 namespace bonndan\ReleaseFlow\Command;
 
 use bonndan\ReleaseFlow\Exception;
@@ -15,22 +16,20 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Daniel Pozzi <bonndan76@googlemail.com>
  */
-class FinishCommand extends Command
-{
+class FinishCommand extends Command {
+
     use FlowDependenciesTrait;
-    
-    protected function configure()
-    {
+
+    protected function configure() {
         $this
             ->setName('finish')
             ->setDescription('Finish a git flow release.')
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        if (!$this->flow->isInTheFlow() || $this->flow->getBranchType() != GitFlowBranch::RELEASE) {
-           throw new Exception('You are not in a git flow release branch.');
+    protected function execute(InputInterface $input, OutputInterface $output) {
+        if (!$this->flow->isInTheFlow()) {
+            throw new Exception('You are not in a git flow release branch.');
         }
 
         $composerVersion = $this->composerFile->getCurrentVersion();
@@ -38,11 +37,18 @@ class FinishCommand extends Command
         if (!Version::gt($branchVersion, $composerVersion)) {
             throw new Exception('The git flow version is not greater than the composer version ' . $composerVersion->getVersion());
         }
-        
-        $type = $composerVersion->getDifferenceType($branchVersion);
-        
-        if ($this->getDialog()->askConfirmation($output, 'Please confirm to finish this <info>' . $type . '</info> release.')) {
-            $this->vcs->finishRelease();
+
+
+        $branchType = $this->flow->getBranchType();
+        if ($branchType != GitFlowBranch::RELEASE) {
+            if ($this->getDialog()->askConfirmation($output, 'Please confirm to finish this hotfix.')) {
+                $this->vcs->finishHotfix();
+            }
+        } else {
+            $difference = $composerVersion->getDifferenceType($branchVersion);
+            if ($this->getDialog()->askConfirmation($output, 'Please confirm to finish this <info>' . $difference . '</info> release.')) {
+                $this->vcs->finishRelease();
+            }
         }
     }
 

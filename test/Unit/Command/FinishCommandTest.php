@@ -26,7 +26,7 @@ class FinishCommandTest extends CommandTest
         $this->simulateHelperSet($this->command);
     }
     
-    public function testThrowsExceptionIfInTheFlow()
+    public function testThrowsExceptionIfNotInTheFlow()
     {
         $this->flow->expects($this->once())
                 ->method('isInTheFlow')
@@ -36,27 +36,13 @@ class FinishCommandTest extends CommandTest
         $this->command->run($this->input, $this->output);
     }
     
-    public function testThrowsExceptionIfInAHotfix()
-    {
-        $this->flow->expects($this->once())
-                ->method('isInTheFlow')
-                ->will($this->returnValue(true));
-        $this->flow->expects($this->once())
-                ->method('getBranchType')
-                ->will($this->returnValue(Version\Detector\GitFlowBranch::HOTFIX));
-        
-        $this->setExpectedException("\bonndan\ReleaseFlow\Exception");
-        $this->command->run($this->input, $this->output);
-    }
+   
     
     public function testThrowsExceptionIfComposerVersionNotLess()
     {
         $this->flow->expects($this->once())
                 ->method('isInTheFlow')
                 ->will($this->returnValue(true));
-        $this->flow->expects($this->once())
-                ->method('getBranchType')
-                ->will($this->returnValue(Version\Detector\GitFlowBranch::RELEASE));
         
         $this->flow->expects($this->once())
                 ->method('getCurrentVersion')
@@ -116,6 +102,32 @@ class FinishCommandTest extends CommandTest
                 ->will($this->returnValue(true));
         $this->vcs->expects($this->once())
                 ->method('finishRelease')
+                ;
+        
+        $this->command->run($this->input, $this->output);
+    }
+    
+    public function testFinishesHotfix()
+    {
+        $this->flow->expects($this->once())
+                ->method('isInTheFlow')
+                ->will($this->returnValue(true));
+        $this->flow->expects($this->once())
+                ->method('getBranchType')
+                ->will($this->returnValue(Version\Detector\GitFlowBranch::HOTFIX));
+        
+        $this->flow->expects($this->once())
+                ->method('getCurrentVersion')
+                ->will($this->returnValue(new Version('0.1.2')));
+        $this->composerFile->expects($this->once())
+                ->method('getCurrentVersion')
+                ->will($this->returnValue(new Version('0.1.1')));
+        
+        $this->dialog->expects($this->once())
+                ->method('askConfirmation')
+                ->will($this->returnValue(true));
+        $this->vcs->expects($this->once())
+                ->method('finishHotfix')
                 ;
         
         $this->command->run($this->input, $this->output);
