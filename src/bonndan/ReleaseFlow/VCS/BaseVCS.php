@@ -2,7 +2,6 @@
 
 namespace bonndan\ReleaseFlow\VCS;
 
-use bonndan\ReleaseFlow\Helpers\TagValidator;
 use bonndan\ReleaseFlow\VCS\VCSInterface;
 use bonndan\ReleaseFlow\Version;
 
